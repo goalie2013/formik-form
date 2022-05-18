@@ -3,8 +3,6 @@ import React from "react";
 import { useFormik } from "formik";
 
 function App() {
-  // TODO: add a const called formik assigned to useFormik()
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,8 +16,17 @@ function App() {
       console.log("---- validate ----");
       console.log("values", values);
       // If the username or password inputs are empty, display the message "Field required" under the text input, by using FormikErrors
+
       const errors = {};
-      if (!values.email) errors.email = "Field required";
+
+      if (!values.email) {
+        errors.email = "Field required";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      ) {
+        errors.email = "Username should be an email";
+      }
+
       if (!values.password) errors.password = "Field required";
 
       return errors;
