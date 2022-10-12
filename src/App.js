@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import "./App.css";
 
 function App() {
-  const [emailError, setEmailError] = useState("");
+  // const [emailError, setEmailError] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -55,7 +55,7 @@ function App() {
             {formik.errors.email ? (
               <div id="emailError">{formik.errors.email}</div>
             ) : null}
-            <div id="emailError">{emailError}</div>
+            {/* <div id="emailError">{emailError}</div> */}
 
             <div>
               <div>
