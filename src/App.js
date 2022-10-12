@@ -1,8 +1,9 @@
-import React from "react";
-// TODO: import useFormik from formik library
+import React, { useState } from "react";
 import { useFormik } from "formik";
+import "./App.css";
 
 function App() {
+  const [emailError, setEmailError] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -10,6 +11,7 @@ function App() {
     },
     onSubmit: (values) => {
       console.log("---- onSubmit ----");
+
       alert("Login Successful");
     },
     validate: (values) => {
@@ -34,42 +36,56 @@ function App() {
   });
 
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <div>Email</div>
-        </div>
-        <input
-          id="emailField"
-          name="email"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          placeholder="Email"
-        />
-        {formik.errors.email ? (
-          <div id="emailError">{formik.errors.email}</div>
-        ) : null}
+    <div className="formWrapper">
+      <div className="myForm">
+        <h1>Sign In Form</h1>
+        <form onSubmit={formik.handleSubmit}>
+          <fieldset>
+            <div>
+              <label htmlFor="emailField">Email</label>
+            </div>
+            <input
+              id="emailField"
+              name="email"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              placeholder="example@mail.com"
+            />
+            {formik.errors.email ? (
+              <div id="emailError">{formik.errors.email}</div>
+            ) : null}
+            <div id="emailError">{emailError}</div>
 
-        <div>
-          <div>Password</div>
-        </div>
-        <input
-          id="pswField"
-          name="password"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          placeholder="Password"
-        />
-        {formik.errors.password ? (
-          <div id="pswError">{formik.errors.password}</div>
-        ) : null}
+            <div>
+              <div>
+                <label htmlFor="pswField">Password</label>
+              </div>
+            </div>
+            <input
+              id="pswField"
+              name="password"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              placeholder="******"
+            />
+            {formik.errors.password ? (
+              <div id="pswError">{formik.errors.password}</div>
+            ) : null}
 
-        <button id="submitBtn" type="submit">
-          Submit
-        </button>
-      </form>
+            <div className="submitBtnWrapper">
+              <button
+                id="submitBtn"
+                type="submit"
+                className="btn btn-lg btn-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
   );
 }
